@@ -4,12 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _15_puzzle
+namespace _15Puzzle
 {
     class Program
     {
         static void Main(string[] args)
         {
+            int[] puzzle =
+            {
+                0, 1, 2, 3,
+                4, 5, 6, 7,
+                8, 9, 10, 11,
+                12, 13, 14, 15
+            };
+
+            Node initPuzzle = new Node(puzzle);
+            UninformedSearch ui = new UninformedSearch();
+
+            List<Node> solution = ui.BFS(initPuzzle);
+
+            if (solution.Count > 0)
+            {
+                for (int i = 0; i < solution.Count; i++)
+                {
+                    solution[i].PrintPuzzle();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No solution found");
+            }
+            Console.Read();
         }
     }
 }
