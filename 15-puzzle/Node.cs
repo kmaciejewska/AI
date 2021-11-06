@@ -10,14 +10,15 @@ namespace _15Puzzle
     {
         public List<Node> edges = new List<Node>();
         public Node parent;
-        public static int col = 4;
-        public static int row = 4;
+        public static int col = 3;
+        public static int row = 3;
         public static int puzzleSize = col * row;
         //to move left we decrease index by 1
         //to move right we increase index by 1
         //to move up we decrease by column size 
         //to move down we increase by column size
         public int[] puzzle = new int[puzzleSize];
+        public int[] goal = new int[puzzleSize];
         public int emptyIndex = 0;
 
         public Node(int[] puzzle)
@@ -30,6 +31,14 @@ namespace _15Puzzle
             for (int i = 0; i < puzzle.Length; i++)
             {
                 this.puzzle[i] = puzzle[i];
+            }
+        }
+
+        public void SetGoal()
+        {
+            for (int i = 0; i < puzzleSize; i++)
+            {
+                goal[i] = i;
             }
         }
 
@@ -145,13 +154,7 @@ namespace _15Puzzle
 
         public bool IsSamePuzzle(int[] p)
         {
-            bool samePuzzle = true;
-            for (int i = 0; i < p.Length; i++)
-            {
-                if (puzzle[i] != p[i])
-                    samePuzzle = false;
-            }
-            return samePuzzle;
+            return puzzle.SequenceEqual(p);
         }
 
         public void PrintPuzzle()

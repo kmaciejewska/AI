@@ -23,24 +23,25 @@ namespace _15Puzzle
             queue.Add(root);
             searched.Add(root);
 
-            while (queue.Count > 0 && !solved)
+            while (queue.Count > 0)
             {
                 Node current = queue[0];
                 queue.RemoveAt(0);
                 searched.Add(current);
+
+                if (current.GoalTest())
+                {
+                    Console.WriteLine("Solved!");
+                    //trace path to root node 
+                    TracePath(path, current);
+                    break;
+                }
 
                 current.ExpandNode();   //perform all legal moves
 
                 for (int i = 0; i < current.edges.Count; i++)
                 {
                     Node currentEdge = current.edges[i];
-                    if (currentEdge.GoalTest())
-                    {
-                        Console.WriteLine("Solved!");
-                        solved = true;
-                        //trace path to root node 
-                        TracePath(path, currentEdge);
-                    }
 
                     /* queue contains current edge ? && current edge is not searched */
                     if (!ContainsNode(queue, currentEdge) && !ContainsNode(searched, currentEdge))
