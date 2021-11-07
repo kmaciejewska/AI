@@ -19,7 +19,6 @@ namespace _15Puzzle
             List<Node> queue = new List<Node>(); //all the nodes that can be expanded
             List<Node> searched = new List<Node>(); //nodes that are already expanded
 
-            bool solved = false;
             queue.Add(root);
             searched.Add(root);
 
