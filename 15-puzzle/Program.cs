@@ -1,4 +1,5 @@
 ﻿using _15_puzzle;
+using _15_puzzle.solvers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace _15Puzzle
             };
 
             Board initPuzzle = new Board(puzzle);
-            Solver bfs = new BFS();
+            Solver bfs = new DFS();
 
             Board solution = bfs.Solve(initPuzzle);
 
-            if (solution.puzzle.Length > 0)
+            if (solution != null && solution.puzzle.Length > 0)
             {
                 solution.PrintPuzzle();
             }

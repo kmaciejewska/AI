@@ -38,10 +38,10 @@ namespace _15_puzzle
         {
             var s = new StringBuilder();
 
-            foreach (var item in path)
+            for (int i = path.Count - 1; i >= 0; i--)
             {
                 s.Append("'");
-                s.Append(item);
+                s.Append(path[i]);
                 s.Append("'");
                 s.Append(", ");
             }
