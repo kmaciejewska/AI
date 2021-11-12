@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _15_puzzle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,27 +13,19 @@ namespace _15Puzzle
         {
             int[] puzzle =
             {
-                1, 5, 2, 3,
-                4, 0, 6, 7,
-                8, 9, 10, 11,
-                12, 13, 14, 15
+                1, 2, 5,
+                3, 4, 0,
+                6, 7, 8
             };
 
-            Node initPuzzle = new Node(puzzle);
-            UninformedSearch ui = new UninformedSearch();
+            Board initPuzzle = new Board(puzzle);
+            Solver bfs = new BFS();
 
-            List<Node> solution = ui.BFS(initPuzzle);
+            Board solution = bfs.Solve(initPuzzle);
 
-            if (solution.Count > 0)
+            if (solution.puzzle.Length > 0)
             {
-                for (int i = 0; i < solution.Count; i++)
-                {
-                    solution[i].PrintPuzzle();
-                }
-            }
-            else
-            {
-                Console.WriteLine("No solution found");
+                solution.PrintPuzzle();
             }
             Console.Read();
         }
