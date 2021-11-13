@@ -11,11 +11,10 @@ namespace _15_puzzle.solvers
     {
         public override Board Solve(Board root)
         {
-            Stack<Board> stack = new Stack<Board>();    //first in last out
-            HashSet<Board> visited = new HashSet<Board>();
+            Stack<Board> stack = new Stack<Board>();    //last in first out
 
             stack.Push(root);
-            visited.Add(root);
+            root.visited = true;
 
             while (stack.Count > 0)
             {
@@ -34,10 +33,10 @@ namespace _15_puzzle.solvers
                 for (int i = 0; i < root.children.Count; i++)
                 {
                     Board currentChild = root.children[i];
-                    if (!visited.Contains(currentChild))
+                    if (!currentChild.visited)
                     {
                         stack.Push(currentChild);
-                        visited.Add(currentChild);
+                        currentChild.visited = true;
                     }
                 }
             }

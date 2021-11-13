@@ -20,7 +20,7 @@ namespace _15Puzzle
             };
 
             Board initPuzzle = new Board(puzzle);
-            Solver bfs = new DFS();
+            Solver bfs = new BFS();
 
             Board solution = bfs.Solve(initPuzzle);
 

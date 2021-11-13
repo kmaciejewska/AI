@@ -11,11 +11,10 @@ namespace _15_puzzle
     {
         public override Board Solve(Board root)
         {
-            HashSet<Board> visited = new HashSet<Board>();   //nodes that are already expanded, hash set bc doesn't allow duplicates
             Queue<Board> queue = new Queue<Board>(); //all the nodes that can be expanded
 
             queue.Enqueue(root);
-            visited.Add(root);
+            root.visited = true;
 
             while (queue.Count > 0)
             {
@@ -36,10 +35,10 @@ namespace _15_puzzle
                     Board currentChild = current.children[i];
 
                     /* queue contains current edge ? && current edge is not searched */
-                    if (!visited.Contains(currentChild))
+                    if (!currentChild.visited)
                     {
                         queue.Enqueue(currentChild);
-                        visited.Add(currentChild);
+                        currentChild.visited = true;
                     }
                         
                 }

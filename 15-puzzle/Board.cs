@@ -16,6 +16,7 @@ namespace _15Puzzle
         public List<Board> children;
         public int[] puzzle;
         public string lastMove;
+        public bool visited;
 
         /**
         * Constructor of the class Board.
@@ -28,6 +29,7 @@ namespace _15Puzzle
             this.children = new List<Board>();
             this.parent = null;
             this.lastMove = "";
+            this.visited = false;
 
             this.puzzle = p;
         }
