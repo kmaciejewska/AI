@@ -50,6 +50,7 @@
     <Compile Include="Solver.cs" />
     <Compile Include="solvers\BFS.cs" />
     <Compile Include="solvers\DFS.cs" />
+    <Compile Include="solvers\IDFS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
