@@ -26,7 +26,7 @@ namespace _15_puzzle
                 return null;
 
 
-            var clonedPuzzle = CopyPuzzle();
+            var clonedPuzzle = Clone();
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x, y + 1];
@@ -41,7 +41,7 @@ namespace _15_puzzle
             if (y == 0)
                 return null;
 
-            var clonedPuzzle = CopyPuzzle();
+            var clonedPuzzle = Clone();
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x, y - 1];
@@ -56,7 +56,7 @@ namespace _15_puzzle
             if (x == (this.currentBoard.puzzle.Length / 3) - 1)
                 return null;
 
-            var clonedPuzzle = CopyPuzzle();
+            var clonedPuzzle = Clone();
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x + 1, y];
@@ -71,7 +71,7 @@ namespace _15_puzzle
             if (x == 0)
                 return null;
 
-            var clonedPuzzle = CopyPuzzle();
+            var clonedPuzzle = Clone();
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x - 1, y];
@@ -81,10 +81,10 @@ namespace _15_puzzle
             return clonedPuzzle;
         }
 
-        public BoardState CopyPuzzle()
+        public BoardState Clone()
         {
             int row = this.currentBoard.puzzle.GetLength(0);
-            int[,] newPuzzle = new int[3, 3];
+            int[,] newPuzzle = new int[row, row];
 
             for (int i = 0; i < this.currentBoard.puzzle.GetLength(0); i++)
             {

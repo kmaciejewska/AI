@@ -19,7 +19,7 @@ namespace _15_puzzle
 
             while (queue.Count > 0)
             {
-                BoardState current = queue.Dequeue();
+                root = queue.Dequeue();
 
                 if (root.currentBoard.IsEqual(this.GoalState))
                 {
@@ -29,10 +29,10 @@ namespace _15_puzzle
                     break;
                 }
 
-                var zero = current.currentBoard.IndexOfZero();
+                var zero = root.currentBoard.IndexOfZero();
                 var zeroX = zero.Item1;
                 var zeroY = zero.Item2;
-                var children = this.ExpandBoard(current, zeroX, zeroY); //perform all legal moves
+                var children = this.ExpandBoard(root, zeroX, zeroY); //perform all legal moves
 
                 for (int i = 0; i < children.Count; i++)
                 {

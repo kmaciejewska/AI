@@ -38,20 +38,20 @@ namespace _15_puzzle
                 children.Add(leftState);
             }
 
-            var upState = currentState.MoveUp(x, y);
-            if (upState != null)
-            {
-                upState.lastMove = "U";
-                upState.parent = currentState;
-                children.Add(upState);
-            }
-
             var downState = currentState.MoveDown(x, y);
             if (downState != null)
             {
                 downState.lastMove = "D";
                 downState.parent = currentState;
                 children.Add(downState);
+            }
+
+            var upState = currentState.MoveUp(x, y);
+            if (upState != null)
+            {
+                upState.lastMove = "U";
+                upState.parent = currentState;
+                children.Add(upState);
             }
 
             return children;
