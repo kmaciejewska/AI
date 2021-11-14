@@ -12,22 +12,14 @@ namespace _15Puzzle
     {
         static void Main(string[] args)
         {
-            int[] puzzle =
-            {
-                1, 2, 5,
-                3, 4, 0,
-                6, 7, 8
-            };
+            var arr = new int[3, 3] { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
 
-            Board initPuzzle = new Board(puzzle);
-            Solver bfs = new BFS();
+            Board initPuzzle = new Board(arr);
+            var startingState = new BoardState(initPuzzle, null, null);
+            Solver bfs = new DFS();
 
-            Board solution = bfs.Solve(initPuzzle);
+            bfs.Solve(startingState);
 
-            if (solution != null && solution.puzzle.Length > 0)
-            {
-                solution.PrintPuzzle();
-            }
             Console.Read();
         }
     }

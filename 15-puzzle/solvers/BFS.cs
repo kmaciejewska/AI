@@ -9,41 +9,43 @@ namespace _15_puzzle
 {
     public class BFS : Solver
     {
-        public override Board Solve(Board root)
+        public override void Solve(BoardState root)
         {
-            Queue<Board> queue = new Queue<Board>(); //all the nodes that can be expanded
+            Queue<BoardState> queue = new Queue<BoardState>(); //all the nodes that can be expanded
+            var visited = new HashSet<Board>();
 
             queue.Enqueue(root);
-            root.visited = true;
+            visited.Add(root.currentBoard);
 
             while (queue.Count > 0)
             {
-                Board current = queue.Dequeue();
+                BoardState current = queue.Dequeue();
 
-                if (current.GoalTest())
+                if (root.currentBoard.IsEqual(this.GoalState))
                 {
                     Console.WriteLine("Solved!");
                     //trace path to root node 
-                    this.PrintSolution(current);
-                    return current;
+                    this.PrintSolution(root);
+                    break;
                 }
 
-                current.ExpandBoard(); //perform all legal moves
+                var zero = current.currentBoard.IndexOfZero();
+                var zeroX = zero.Item1;
+                var zeroY = zero.Item2;
+                var children = this.ExpandBoard(current, zeroX, zeroY); //perform all legal moves
 
-                for (int i = 0; i < current.children.Count; i++)
+                for (int i = 0; i < children.Count; i++)
                 {
-                    Board currentChild = current.children[i];
+                    BoardState currentChild = children[i];
 
-                    /* queue contains current edge ? && current edge is not searched */
-                    if (!currentChild.visited)
+                    if (!visited.Contains(currentChild.currentBoard))
                     {
                         queue.Enqueue(currentChild);
-                        currentChild.visited = true;
+                        visited.Add(currentChild.currentBoard);
                     }
                         
                 }
             }
-            return null;
         }
     }
 }

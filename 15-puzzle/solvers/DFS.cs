@@ -9,38 +9,68 @@ namespace _15_puzzle.solvers
 {
     public class DFS : Solver
     {
-        public override Board Solve(Board root)
+        HashSet<Board> visited = new HashSet<Board>();
+
+        public override void Solve(BoardState root)
         {
-            Stack<Board> stack = new Stack<Board>();    //last in first out
+            visited.Add(root.currentBoard);
+            if (root.currentBoard.IsEqual(this.GoalState))
+            {
+                //trace path to root node 
+                this.PrintSolution(root);
+                return;
+            }
+
+            var zero = root.currentBoard.IndexOfZero();
+            var zeroX = zero.Item1;
+            var zeroY = zero.Item2;
+
+            var children = this.ExpandBoard(root, zeroX, zeroY);
+            for (int i = 0; i < children.Count; i++)
+            {
+                BoardState currentChild = children[i];
+
+                if(!visited.Contains(currentChild.currentBoard))
+                {
+                    this.Solve(currentChild);
+                }
+            }
+
+            /*Stack<BoardState> stack = new Stack<BoardState>(); //last in first out
+            HashSet<Board> visited = new HashSet<Board>();
 
             stack.Push(root);
-            root.visited = true;
+            visited.Add(root.currentBoard);
 
             while (stack.Count > 0)
             {
                 root = stack.Pop();
 
-                if (root.GoalTest())
+                if (root.currentBoard.IsEqual(this.GoalState))
                 {
-                    Console.WriteLine("Solved!");
                     //trace path to root node 
                     this.PrintSolution(root);
-                    return root;
+                    break;
                 }
 
-                root.ExpandBoard();
-                
-                for (int i = 0; i < root.children.Count; i++)
+                var zero = root.currentBoard.IndexOfZero();
+                var zeroX = zero.Item1;
+                var zeroY = zero.Item2;
+
+                var children = this.ExpandBoard(root, zeroX, zeroY);
+
+                for (int i = 0; i < children.Count; i++)
                 {
-                    Board currentChild = root.children[i];
-                    if (!currentChild.visited)
+                    var currentChild = children[i];
+
+                    if(!visited.Contains(currentChild.currentBoard))
                     {
                         stack.Push(currentChild);
-                        currentChild.visited = true;
+                        visited.Add(currentChild.currentBoard);
                     }
                 }
-            }
-            return null;
+            }*/
         }
+        
     }
 }
