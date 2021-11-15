@@ -1,10 +1,6 @@
 ﻿using _15_puzzle;
 using _15_puzzle.solvers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _15Puzzle
 {
@@ -16,7 +12,7 @@ namespace _15Puzzle
 
             Board initPuzzle = new Board(arr);
             var startingState = new BoardState(initPuzzle, null, null);
-            Solver bfs = new IDFS();
+            Solver bfs = new DFS();
             bfs.SetGoalState(3, 3);
 
             bfs.Solve(startingState);
