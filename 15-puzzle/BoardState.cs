@@ -22,7 +22,7 @@ namespace _15_puzzle
 
         public BoardState MoveToRight(int x, int y)
         {
-            if (y == (this.currentBoard.puzzle.Length / 3) - 1)
+            if (y == (this.currentBoard.puzzle.Length / this.currentBoard.puzzle.GetLength(0)) - 1)
                 return null;
 
 
@@ -30,7 +30,7 @@ namespace _15_puzzle
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x, y + 1];
-            clonedPuzzle.currentBoard.puzzle[x, y + 1] = 0;
+            clonedPuzzle.currentBoard.puzzle[x, y + 1] = clonedPuzzle.currentBoard.puzzle[x, y];
             clonedPuzzle.currentBoard.puzzle[x, y] = temp;
 
             return clonedPuzzle;
@@ -45,7 +45,7 @@ namespace _15_puzzle
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x, y - 1];
-            clonedPuzzle.currentBoard.puzzle[x, y - 1] = 0;
+            clonedPuzzle.currentBoard.puzzle[x, y - 1] = clonedPuzzle.currentBoard.puzzle[x, y];
             clonedPuzzle.currentBoard.puzzle[x, y] = temp;
 
             return clonedPuzzle;
@@ -53,14 +53,14 @@ namespace _15_puzzle
 
         public BoardState MoveDown(int x, int y)
         {
-            if (x == (this.currentBoard.puzzle.Length / 3) - 1)
+            if (x == (this.currentBoard.puzzle.Length / this.currentBoard.puzzle.GetLength(0)) - 1)
                 return null;
 
             var clonedPuzzle = Clone();
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x + 1, y];
-            clonedPuzzle.currentBoard.puzzle[x + 1, y] = 0;
+            clonedPuzzle.currentBoard.puzzle[x + 1, y] = clonedPuzzle.currentBoard.puzzle[x, y];
             clonedPuzzle.currentBoard.puzzle[x, y] = temp;
 
             return clonedPuzzle;
@@ -75,7 +75,7 @@ namespace _15_puzzle
 
             //swap places
             var temp = clonedPuzzle.currentBoard.puzzle[x - 1, y];
-            clonedPuzzle.currentBoard.puzzle[x - 1, y] = 0;
+            clonedPuzzle.currentBoard.puzzle[x - 1, y] = clonedPuzzle.currentBoard.puzzle[x, y];
             clonedPuzzle.currentBoard.puzzle[x, y] = temp;
 
             return clonedPuzzle;

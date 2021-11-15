@@ -13,7 +13,20 @@ namespace _15_puzzle
 
         public Solver()
         {
-            this.GoalState = new int[3, 3] { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
+        }
+
+        public void SetGoalState(int row, int col)
+        {
+            this.GoalState = new int[row, col];
+            int num = 0;
+            for (int i = 0; i < row; i++)
+            {
+                for(int j = 0; j < col; j++)
+                {
+                    this.GoalState[i, j] = num;
+                    num++;
+                }
+            }
         }
 
         public abstract void Solve(BoardState root);
