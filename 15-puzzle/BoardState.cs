@@ -1,9 +1,13 @@
 ﻿using _15Puzzle;
+using System;
 
 namespace _15_puzzle
 {
     public class BoardState
     {
+        private int manhatanDistance;
+        private int euclideanDistance;
+
         public BoardState parent;
         public string lastMove;
         public Board currentBoard;
@@ -29,6 +33,49 @@ namespace _15_puzzle
                     num++;
                 }
             }
+        }
+
+        public int ManhatanDistance()
+        {
+            var matrix = this.currentBoard.puzzle;
+            this.manhatanDistance = 0;
+
+            for (int i = 1; i < matrix.Length; i++)
+            {
+                var indexGoal = IndexOf(i, GoalState);
+                var index = IndexOf(i, matrix);
+                this.manhatanDistance += Math.Abs(indexGoal.Item1 - index.Item1) + Math.Abs(indexGoal.Item2 - index.Item2);
+            }
+
+            return this.manhatanDistance;
+        }
+
+        public int EuclideanDistance()
+        {
+            var matrix = this.currentBoard.puzzle;
+            this.euclideanDistance = 0;
+
+            for (int i = 1; i < matrix.Length; i++)
+            {
+                var indexGoal = IndexOf(i, GoalState);
+                var index = IndexOf(i, matrix);
+                this.euclideanDistance += (int)Math.Sqrt(Math.Pow((double)(indexGoal.Item1 - index.Item1), 2) + Math.Pow((double)(indexGoal.Item2 - index.Item2), 2));
+            }
+
+            return this.euclideanDistance;
+        }
+
+        private Tuple<int, int> IndexOf(int number, int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i, j].Equals(number))
+                        return Tuple.Create(i, j);
+                }
+            }
+            return Tuple.Create(-1, -1);
         }
 
         public BoardState MoveToRight(int x, int y)
