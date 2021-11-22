@@ -20,7 +20,7 @@ namespace _15_puzzle.solvers
             {
                 root = stack.Pop();
 
-                if (root.currentBoard.IsEqual(this.GoalState))
+                if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
                     //trace path to root node 

@@ -21,7 +21,7 @@ namespace _15_puzzle
             {
                 root = queue.Dequeue();
 
-                if (root.currentBoard.IsEqual(this.GoalState))
+                if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
                     //trace path to root node 

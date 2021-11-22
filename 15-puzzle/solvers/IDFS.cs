@@ -32,7 +32,7 @@ namespace _15_puzzle.solvers
             // If reached the maximum depth, stop recursing.
             if (limit <= 0)
             {
-                if (root.currentBoard.IsEqual(this.GoalState))
+                if (root.currentBoard.IsEqual(root.GoalState))
                     return new Tuple<BoardState, bool>(root, true);
                 else
                     return new Tuple<BoardState, bool>(null, true);

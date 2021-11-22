@@ -6,24 +6,8 @@ namespace _15_puzzle
 {
     public abstract class Solver
     {
-        protected int[,] GoalState { get; set; }
-
         public Solver()
         {
-        }
-
-        public void SetGoalState(int row, int col)
-        {
-            this.GoalState = new int[row, col];
-            int num = 0;
-            for (int i = 0; i < row; i++)
-            {
-                for(int j = 0; j < col; j++)
-                {
-                    this.GoalState[i, j] = num;
-                    num++;
-                }
-            }
         }
 
         public abstract void Solve(BoardState root);

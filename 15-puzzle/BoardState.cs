@@ -7,12 +7,28 @@ namespace _15_puzzle
         public BoardState parent;
         public string lastMove;
         public Board currentBoard;
+        public int[,] GoalState { get; set; }
 
         public BoardState(Board currentBoard, BoardState parent, string lastMove)
         {
             this.currentBoard = currentBoard;
             this.parent = parent;
             this.lastMove = lastMove;
+            SetGoalState(3, 3);
+        }
+
+        public void SetGoalState(int row, int col)
+        {
+            this.GoalState = new int[row, col];
+            int num = 0;
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    this.GoalState[i, j] = num;
+                    num++;
+                }
+            }
         }
 
         public BoardState MoveToRight(int x, int y)
