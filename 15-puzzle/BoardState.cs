@@ -24,17 +24,25 @@ namespace _15_puzzle
         public void SetGoalState(int row, int col)
         {
             this.GoalState = new int[row, col];
-            int num = 0;
+            int num = 1;
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
                 {
-                    this.GoalState[i, j] = num;
-                    num++;
+                    if ((i == row - 1) && (j == col - 1))
+                    {
+                        this.GoalState[i, j] = 0;
+                    }
+                    else
+                    {
+                        this.GoalState[i, j] = num;
+                        num++;
+                    }
                 }
             }
         }
 
+        //heuristics
         public int ManhatanDistance()
         {
             var matrix = this.currentBoard.puzzle;
@@ -78,6 +86,7 @@ namespace _15_puzzle
             return Tuple.Create(-1, -1);
         }
 
+        //moves
         public BoardState MoveToRight(int x, int y)
         {
             if (y == (this.currentBoard.puzzle.Length / this.currentBoard.puzzle.GetLength(0)) - 1)

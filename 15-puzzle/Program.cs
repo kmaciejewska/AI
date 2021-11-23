@@ -12,7 +12,7 @@ namespace _15Puzzle
 
             Board initPuzzle = new Board(arr);
             var startingState = new BoardState(initPuzzle, null, null);
-            Solver bfs = new BFS();
+            Solver bfs = new DFS();
 
             bfs.Solve(startingState);
 
