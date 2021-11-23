@@ -11,8 +11,8 @@ namespace _15Puzzle
             var arr = new int[3, 3] { { 1, 2, 5 }, { 3, 0, 4 }, { 6, 7, 8 } };
 
             Board initPuzzle = new Board(arr);
-            var startingState = new BoardState(initPuzzle, null, null);
-            Solver bfs = new BF();
+            var startingState = new BoardState(initPuzzle, null, null, 0, "m");
+            Solver bfs = new AStar();
 
             bfs.Solve(startingState);
 

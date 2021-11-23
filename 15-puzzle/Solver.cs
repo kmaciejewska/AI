@@ -21,6 +21,8 @@ namespace _15_puzzle
             {
                 rightState.lastMove = "R";
                 rightState.parent = currentState;
+                rightState.Cost++;
+                rightState.CostDistance = rightState.Cost + rightState.Distance;
                 children.Add(rightState);
             }
 
@@ -29,6 +31,8 @@ namespace _15_puzzle
             {
                 leftState.lastMove = "L";
                 leftState.parent = currentState;
+                leftState.Cost++;
+                leftState.CostDistance = leftState.Cost + leftState.Distance;
                 children.Add(leftState);
             }
 
@@ -37,6 +41,8 @@ namespace _15_puzzle
             {
                 downState.lastMove = "D";
                 downState.parent = currentState;
+                downState.Cost++;
+                downState.CostDistance = downState.Cost + downState.Distance;
                 children.Add(downState);
             }
 
@@ -45,6 +51,8 @@ namespace _15_puzzle
             {
                 upState.lastMove = "U";
                 upState.parent = currentState;
+                upState.Cost++;
+                upState.CostDistance = upState.Cost + upState.Distance;
                 children.Add(upState);
             }
 

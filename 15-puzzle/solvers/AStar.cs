@@ -1,29 +1,23 @@
-﻿using System;
+﻿using _15Puzzle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _15Puzzle;
-using C5;
 
 namespace _15_puzzle.solvers
 {
-    public class BF : Solver
+    public class AStar : Solver
     {
         public override void Solve(BoardState root)
         {
-            var queue = new IntervalHeap<BoardState>(); //odrered by distance
-            System.Collections.Generic.HashSet<Board> visited = new System.Collections.Generic.HashSet<Board>();
+            var queue = new List<BoardState>(); 
+            HashSet<Board> visited = new HashSet<Board>();
 
             queue.Add(root);
-            visited.Add(root.currentBoard);
 
             while (queue.Count > 0)
             {
-                //we are using DeleteMax because CompareTo 
-                //returns 1 if the distance is smaller
-                root = queue.DeleteMax();   
-                
+                root = queue.OrderBy(x => x.CostDistance).First();
+
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
@@ -31,6 +25,9 @@ namespace _15_puzzle.solvers
                     this.PrintSolution(root);
                     break;
                 }
+
+                visited.Add(root.currentBoard);
+                queue.Remove(root);
 
                 var zero = root.currentBoard.IndexOfZero();
                 var zeroX = zero.Item1;
@@ -41,10 +38,23 @@ namespace _15_puzzle.solvers
                 for (int i = 0; i < children.Count; i++)
                 {
                     var currentChild = children[i];
-                    if (!visited.Contains(currentChild.currentBoard))
+                    if (visited.Contains(currentChild.currentBoard))
+                        continue;
+
+                    //might already be in the list 
+                    if (queue.Any(x=> x == currentChild))
                     {
+                        var existingChild = queue.First(x => x == currentChild);
+                        if (existingChild.CostDistance > root.CostDistance)
+                        {
+                            queue.Remove(existingChild);
+                            queue.Add(currentChild);
+                        }
+                    }
+                    else
+                    {
+                        //new tile before so add it to the list. 
                         queue.Add(currentChild);
-                        visited.Add(currentChild.currentBoard);
                     }
                 }
             }

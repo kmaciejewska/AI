@@ -5,20 +5,26 @@ namespace _15_puzzle
 {
     public class BoardState : IComparable<BoardState>
     {
-        private int manhatanDistance;
-        private int euclideanDistance;
-
         public BoardState parent;
         public string lastMove;
         public Board currentBoard;
         public int[,] GoalState { get; set; }
+        public int Distance { get; set; }
+        public int Cost { get; set; }
+        public int CostDistance { get; set; }
+        public string HeuristicID { get; set; }
 
-        public BoardState(Board currentBoard, BoardState parent, string lastMove)
+        public BoardState(Board currentBoard, BoardState parent, string lastMove, int cost, string heuristicID)
         {
             this.currentBoard = currentBoard;
             this.parent = parent;
             this.lastMove = lastMove;
+            this.Cost = cost;
+            this.HeuristicID = heuristicID;
+
             SetGoalState(3, 3);
+            SetDistance();
+            
         }
 
         public void SetGoalState(int row, int col)
@@ -42,35 +48,45 @@ namespace _15_puzzle
             }
         }
 
+        public void SetDistance()
+        {
+            if (this.HeuristicID == null)
+                this.Distance = 0;
+            else if (HeuristicID == "m")
+                this.Distance = this.ManhatanDistance();
+            else if (HeuristicID == "e")
+                this.Distance = this.EuclideanDistance();
+        }
+
         //heuristics
         public int ManhatanDistance()
         {
             var matrix = this.currentBoard.puzzle;
-            this.manhatanDistance = 0;
+            int manhatanDistance = 0;
 
             for (int i = 1; i < matrix.Length; i++)
             {
                 var indexGoal = IndexOf(i, GoalState);
                 var index = IndexOf(i, matrix);
-                this.manhatanDistance += Math.Abs(indexGoal.Item1 - index.Item1) + Math.Abs(indexGoal.Item2 - index.Item2);
+                manhatanDistance += Math.Abs(indexGoal.Item1 - index.Item1) + Math.Abs(indexGoal.Item2 - index.Item2);
             }
 
-            return this.manhatanDistance;
+            return manhatanDistance;
         }
 
         public int EuclideanDistance()
         {
             var matrix = this.currentBoard.puzzle;
-            this.euclideanDistance = 0;
+            int euclideanDistance = 0;
 
             for (int i = 1; i < matrix.Length; i++)
             {
                 var indexGoal = IndexOf(i, GoalState);
                 var index = IndexOf(i, matrix);
-                this.euclideanDistance += (int)Math.Sqrt(Math.Pow((double)(indexGoal.Item1 - index.Item1), 2) + Math.Pow((double)(indexGoal.Item2 - index.Item2), 2));
+                euclideanDistance += (int)Math.Sqrt(Math.Pow((double)(indexGoal.Item1 - index.Item1), 2) + Math.Pow((double)(indexGoal.Item2 - index.Item2), 2));
             }
 
-            return this.euclideanDistance;
+            return euclideanDistance;
         }
 
         private Tuple<int, int> IndexOf(int number, int[,] matrix)
@@ -161,7 +177,7 @@ namespace _15_puzzle
 
             var clonedBoard = new Board(newPuzzle);
 
-            return new BoardState(clonedBoard, this.parent, this.lastMove);
+            return new BoardState(clonedBoard, this.parent, this.lastMove, this.Cost, this.HeuristicID);
         }
 
         public override int GetHashCode()
@@ -181,8 +197,8 @@ namespace _15_puzzle
         public int CompareTo(BoardState other)
         {
             // Heuristic value
-            var thisValue = this.ManhatanDistance();
-            var otherValue = other.ManhatanDistance();
+            var thisValue = this.Distance;
+            var otherValue = other.Distance;
 
             if (thisValue < otherValue)
             {
