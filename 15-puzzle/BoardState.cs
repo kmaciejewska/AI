@@ -3,7 +3,7 @@ using System;
 
 namespace _15_puzzle
 {
-    public class BoardState
+    public class BoardState : IComparable<BoardState>
     {
         private int manhatanDistance;
         private int euclideanDistance;
@@ -174,6 +174,28 @@ namespace _15_puzzle
             var otherState = (BoardState)obj;
 
             return this.currentBoard.Equals(otherState.currentBoard);
+        }
+
+        //used for informed algorithms to compare heuristics of successor boards
+        //in interval heaps
+        public int CompareTo(BoardState other)
+        {
+            // Heuristic value
+            var thisValue = this.ManhatanDistance();
+            var otherValue = other.ManhatanDistance();
+
+            if (thisValue < otherValue)
+            {
+                return 1;
+            }
+            else if (thisValue > otherValue)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
