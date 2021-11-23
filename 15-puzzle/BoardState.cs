@@ -22,7 +22,7 @@ namespace _15_puzzle
             this.Cost = cost;
             this.HeuristicID = heuristicID;
 
-            SetGoalState(3, 3);
+            SetGoalState(currentBoard.puzzle.GetLength(0), currentBoard.puzzle.GetLength(1));
             SetDistance();
             
         }

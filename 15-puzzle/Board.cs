@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _15Puzzle
 {
@@ -70,13 +71,11 @@ namespace _15Puzzle
         public override int GetHashCode()
         {
             int result = 0;
-            int shift = 0;
             for (int i = 0; i < this.puzzle.GetLength(0); i++)
             {
                 for (int j = 0; j < this.puzzle.GetLength(1); j++)
                 {
-                    shift = (shift + 11) % 21;
-                    result ^= (this.puzzle[i, j] + 1024) << shift;
+                    result += 1373196949 + EqualityComparer<int>.Default.GetHashCode(puzzle[i, j]);
                 }
             }
             return result;
