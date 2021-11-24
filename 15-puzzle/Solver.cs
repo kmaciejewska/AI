@@ -10,7 +10,8 @@ namespace _15_puzzle
         {
         }
 
-        public abstract void Solve(BoardState root);
+        protected int SearchDepth { get; set; }
+        public abstract BoardState Solve(BoardState root);
 
         protected List<BoardState> ExpandBoard(BoardState currentState, int x, int y)
         {
@@ -61,6 +62,9 @@ namespace _15_puzzle
 
         private List<string> TracePath(BoardState state)
         {
+            if (state == null) 
+                return null;
+
             var path = new List<string>();
             Console.WriteLine("Tracing path...");
 
@@ -75,6 +79,9 @@ namespace _15_puzzle
 
         private string GetStringPath(List<string> path)
         {
+            if (path == null)
+                return "";
+
             var s = new StringBuilder();
 
             for (int i = path.Count - 1; i >= 0; i--)
@@ -90,13 +97,13 @@ namespace _15_puzzle
 
         public void PrintSolution(BoardState finalBoard)
         {
+            if (finalBoard == null)
+            {
+                Console.WriteLine("No solution found!");
+            }
             var path = TracePath(finalBoard);
             string ps = GetStringPath(path);
-
-            if (ps == null)
-                Console.WriteLine("No solution found");
-            else
-                Console.WriteLine($"Path to goal: {ps}");
+            Console.WriteLine($"Path to goal: {ps}");
         }
     }
 }

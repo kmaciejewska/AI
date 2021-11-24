@@ -56,6 +56,7 @@
     <Compile Include="solvers\BFS.cs" />
     <Compile Include="solvers\DFS.cs" />
     <Compile Include="solvers\IDFS.cs" />
+    <Compile Include="solvers\SMA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

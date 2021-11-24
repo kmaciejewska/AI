@@ -5,7 +5,7 @@ namespace _15_puzzle.solvers
 {
     public class IDFS : Solver
     {
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             int depth = 1; 
             for(int i = 0; i <= depth; i++)
@@ -14,17 +14,15 @@ namespace _15_puzzle.solvers
                 if (foundRemaining.Item1 != null)
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(foundRemaining.Item1);
-                    break;
+                    return root;
                 }
                 else if (!foundRemaining.Item2)
                 {
-                    return;
+                    return null;
                 }
                 depth++;
             }
-
+            return null;
         }
 
         public Tuple<BoardState, bool> DLS(BoardState root, int limit)

@@ -7,7 +7,7 @@ namespace _15_puzzle.solvers
 {
     public class AStar : Solver
     {
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             var queue = new List<BoardState>(); 
             HashSet<Board> visited = new HashSet<Board>();
@@ -21,9 +21,7 @@ namespace _15_puzzle.solvers
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(root);
-                    break;
+                    return root;
                 }
 
                 visited.Add(root.currentBoard);
@@ -58,6 +56,7 @@ namespace _15_puzzle.solvers
                     }
                 }
             }
+            return null;
         }
     }
 }

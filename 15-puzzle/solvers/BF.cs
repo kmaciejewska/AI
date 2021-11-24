@@ -10,7 +10,7 @@ namespace _15_puzzle.solvers
 {
     public class BF : Solver
     {
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             var queue = new IntervalHeap<BoardState>(); //odrered by distance
             System.Collections.Generic.HashSet<Board> visited = new System.Collections.Generic.HashSet<Board>();
@@ -27,9 +27,7 @@ namespace _15_puzzle.solvers
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(root);
-                    break;
+                    return root;
                 }
 
                 var zero = root.currentBoard.IndexOfZero();
@@ -48,6 +46,7 @@ namespace _15_puzzle.solvers
                     }
                 }
             }
+            return null;
         }
     }
 }

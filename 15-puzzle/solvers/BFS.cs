@@ -9,7 +9,7 @@ namespace _15_puzzle
 {
     public class BFS : Solver
     {
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             Queue<BoardState> queue = new Queue<BoardState>(); //all the nodes that can be expanded
             var visited = new HashSet<Board>();
@@ -24,9 +24,7 @@ namespace _15_puzzle
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(root);
-                    break;
+                    return root;
                 }
 
                 var zero = root.currentBoard.IndexOfZero();
@@ -46,6 +44,7 @@ namespace _15_puzzle
                         
                 }
             }
+            return null;
         }
     }
 }

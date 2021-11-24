@@ -14,7 +14,7 @@ namespace _15_puzzle
         public int CostDistance { get; set; }
         public string HeuristicID { get; set; }
 
-        public BoardState(Board currentBoard, BoardState parent, string lastMove, int cost, string heuristicID)
+        public BoardState(Board currentBoard, BoardState parent, string lastMove, int cost, string heuristicID = "")
         {
             this.currentBoard = currentBoard;
             this.parent = parent;
@@ -31,6 +31,7 @@ namespace _15_puzzle
         {
             this.GoalState = new int[row, col];
             int num = 1;
+            
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
@@ -50,7 +51,7 @@ namespace _15_puzzle
 
         public void SetDistance()
         {
-            if (this.HeuristicID == null)
+            if (this.HeuristicID == "")
                 this.Distance = 0;
             else if (HeuristicID == "m")
                 this.Distance = this.ManhatanDistance();

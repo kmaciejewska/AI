@@ -8,13 +8,14 @@ namespace _15Puzzle
     {
         static void Main(string[] args)
         {
-            var arr = new int[3, 3] { { 1, 2, 5 }, { 3, 0, 4 }, { 6, 7, 8 } };
+            var arr = new int[3, 3] { { 1, 0, 3 }, { 2, 4, 5 }, { 6, 7, 8 } };
 
             Board initPuzzle = new Board(arr);
             var startingState = new BoardState(initPuzzle, null, null, 0, "m");
-            Solver bfs = new DFS();
+            Solver solver = new BFS();
 
-            bfs.Solve(startingState);
+            BoardState solution = solver.Solve(startingState);
+            solver.PrintSolution(solution);
 
             Console.Read();
         }

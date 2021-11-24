@@ -6,9 +6,7 @@ namespace _15_puzzle.solvers
 {
     public class DFS : Solver
     {
-        HashSet<Board> visited = new HashSet<Board>();
-
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             Stack<BoardState> stack = new Stack<BoardState>(); //last in first out
             HashSet<Board> visited = new HashSet<Board>();
@@ -23,9 +21,7 @@ namespace _15_puzzle.solvers
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(root);
-                    break;
+                    return root;
                 }
 
                 var zero = root.currentBoard.IndexOfZero();
@@ -45,6 +41,7 @@ namespace _15_puzzle.solvers
                     }
                 }
             }
+            return null;
         }
         
     }

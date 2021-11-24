@@ -7,7 +7,7 @@ namespace _15_puzzle.solvers
 {
     public class SMA : Solver
     {
-        public override void Solve(BoardState root)
+        public override BoardState Solve(BoardState root)
         {
             var queue = new List<BoardState>();
             queue.Add(root);
@@ -21,13 +21,11 @@ namespace _15_puzzle.solvers
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");
-                    //trace path to root node 
-                    this.PrintSolution(root);
-                    break;
+                    return root;
                 }
                 else if (root.CostDistance == int.MaxValue)
                 {
-                    return;
+                    return null;
                 }
 
                 if (root.CostDistance > this.SearchDepth)
@@ -65,6 +63,7 @@ namespace _15_puzzle.solvers
                         queue.Add(parent);
                 }
             }
+            return null;
         }
     }
 }
