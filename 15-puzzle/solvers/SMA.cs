@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class SMA : Solver
     {
@@ -16,7 +16,7 @@ namespace _15_Puzzle.solvers
             queue.Add(root);
             int u = 1; //for recording nodes in memory
 
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 root = queue.OrderBy(x => x.CostDistance).First();
                 queue.Remove(root);
@@ -44,10 +44,10 @@ namespace _15_Puzzle.solvers
 
                 foreach (var child in children)
                 {
-                    if(!child.currentBoard.IsEqual(child.GoalState) && child.Cost == this.SearchDepth)
+                    if (!child.currentBoard.IsEqual(child.GoalState) && child.Cost == this.SearchDepth)
                     {
                         child.CostDistance = int.MaxValue;
-                    } 
+                    }
                     else
                     {
                         child.CostDistance = Math.Max(root.CostDistance, child.Cost + child.Distance);

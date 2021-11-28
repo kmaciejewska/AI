@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class DFS : Solver
     {
@@ -38,7 +38,7 @@ namespace _15_Puzzle.solvers
                 {
                     var currentChild = children[i];
 
-                    if(!visited.Contains(currentChild.currentBoard))
+                    if (!visited.Contains(currentChild.currentBoard))
                     {
                         stack.Push(currentChild);
                         visited.Add(currentChild.currentBoard);
@@ -47,6 +47,6 @@ namespace _15_Puzzle.solvers
             }
             return null;
         }
-        
+
     }
 }

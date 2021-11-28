@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class IDFS : Solver
     {
@@ -11,8 +11,8 @@ namespace _15_Puzzle.solvers
         }
         public override BoardState Solve(BoardState root)
         {
-            int depth = 1; 
-            for(int i = 0; i <= depth; i++)
+            int depth = 1;
+            for (int i = 0; i <= depth; i++)
             {
                 var foundRemaining = DLS(root, i);
                 if (foundRemaining.Item1 != null)

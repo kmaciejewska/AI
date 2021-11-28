@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class BFS : Solver
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using C5;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class BF : Solver
     {
@@ -21,8 +21,8 @@ namespace _15_Puzzle.solvers
             {
                 //we are using DeleteMax because CompareTo 
                 //returns 1 if the distance is smaller
-                root = queue.DeleteMax();   
-                
+                root = queue.DeleteMax();
+
                 if (root.currentBoard.IsEqual(root.GoalState))
                 {
                     Console.WriteLine("Solved!");

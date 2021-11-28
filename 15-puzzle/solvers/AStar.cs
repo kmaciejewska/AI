@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _15_Puzzle.solvers
+namespace _15_Puzzle
 {
     public class AStar : Solver
     {
@@ -12,7 +12,7 @@ namespace _15_Puzzle.solvers
         }
         public override BoardState Solve(BoardState root)
         {
-            var queue = new List<BoardState>(); 
+            var queue = new List<BoardState>();
             HashSet<Board> visited = new HashSet<Board>();
 
             queue.Add(root);
@@ -43,7 +43,7 @@ namespace _15_Puzzle.solvers
                         continue;
 
                     //might already be in the list 
-                    if (queue.Any(x=> x == currentChild))
+                    if (queue.Any(x => x == currentChild))
                     {
                         var existingChild = queue.First(x => x == currentChild);
                         if (existingChild.CostDistance > root.CostDistance)
