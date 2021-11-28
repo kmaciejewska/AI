@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _15Puzzle
+namespace _15_Puzzle
 {
     public class Board
     {

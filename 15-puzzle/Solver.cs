@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace _15_puzzle
+namespace _15_Puzzle
 {
     public abstract class Solver
     {
-        public Solver()
+        private string order;
+        public Solver(string order)
         {
+            this.order = order;
         }
 
         protected int SearchDepth { get; set; }
@@ -92,7 +94,10 @@ namespace _15_puzzle
                 s.Append(", ");
             }
 
-            return s.ToString();
+            var pathToGoal = s.ToString().TrimEnd(new[] { ',', ' ' });
+            pathToGoal += "]";
+
+            return pathToGoal;
         }
 
         public void PrintSolution(BoardState finalBoard)

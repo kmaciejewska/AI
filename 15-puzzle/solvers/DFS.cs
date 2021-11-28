@@ -1,11 +1,15 @@
-﻿using _15Puzzle;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace _15_puzzle.solvers
+namespace _15_Puzzle.solvers
 {
     public class DFS : Solver
     {
+        public DFS(string order) : base(order)
+        {
+
+        }
+
         public override BoardState Solve(BoardState root)
         {
             Stack<BoardState> stack = new Stack<BoardState>(); //last in first out

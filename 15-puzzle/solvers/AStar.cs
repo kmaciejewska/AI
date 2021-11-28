@@ -1,12 +1,15 @@
-﻿using _15Puzzle;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _15_puzzle.solvers
+namespace _15_Puzzle.solvers
 {
     public class AStar : Solver
     {
+        public AStar(string order) : base(order)
+        {
+
+        }
         public override BoardState Solve(BoardState root)
         {
             var queue = new List<BoardState>(); 

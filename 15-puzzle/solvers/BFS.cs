@@ -1,14 +1,15 @@
-﻿using _15Puzzle;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace _15_puzzle
+namespace _15_Puzzle.solvers
 {
     public class BFS : Solver
     {
+        public BFS(string order) : base(order)
+        {
+
+        }
+
         public override BoardState Solve(BoardState root)
         {
             Queue<BoardState> queue = new Queue<BoardState>(); //all the nodes that can be expanded
@@ -41,7 +42,7 @@ namespace _15_puzzle
                         queue.Enqueue(currentChild);
                         visited.Add(currentChild.currentBoard);
                     }
-                        
+
                 }
             }
             return null;

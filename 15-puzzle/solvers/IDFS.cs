@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
 
-namespace _15_puzzle.solvers
+namespace _15_Puzzle.solvers
 {
     public class IDFS : Solver
     {
+        public IDFS(string order) : base(order)
+        {
+
+        }
         public override BoardState Solve(BoardState root)
         {
             int depth = 1; 

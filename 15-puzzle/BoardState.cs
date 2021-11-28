@@ -1,7 +1,6 @@
-﻿using _15Puzzle;
-using System;
+﻿using System;
 
-namespace _15_puzzle
+namespace _15_Puzzle
 {
     public class BoardState : IComparable<BoardState>
     {

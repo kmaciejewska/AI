@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _15Puzzle;
 using C5;
 
-namespace _15_puzzle.solvers
+namespace _15_Puzzle.solvers
 {
     public class BF : Solver
     {
+        public BF(string order) : base(order)
+        {
+
+        }
         public override BoardState Solve(BoardState root)
         {
             var queue = new IntervalHeap<BoardState>(); //odrered by distance
